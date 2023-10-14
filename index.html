@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Icon Links</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .link-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-width: 80%;
+        }
+
+        .link-block {
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .link-block a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .link-block a:hover {
+            color: #007bff;
+        }
+
+        .icon {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="link-container">
+        <div class="link-block">
+            <a href="#">
+                <span class="icon">Icon 1</span>
+                Link 1
+            </a>
+        </div>
+        <div class="link-block">
+            <a href="#">
+                <span class="icon">Icon 2</span>
+                Link 2
+            </a>
+        </div>
+        <div class="link-block">
+            <a href="#">
+                <span class="icon">Icon 3</span>
+                Link 3
+            </a>
+        </div>
+    </div>
+</body>
+</html>
