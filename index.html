@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Icon Links</title>
+    <title>Centered Icon Links with Theme Switcher</title>
     <style>
         body {
             display: flex;
@@ -11,26 +11,39 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            font-family: 'Roboto', sans-serif; /* Use the Roboto font */
         }
 
         .link-container {
             display: flex;
-            justify-content: space-around;
+            flex-wrap: wrap;
+            justify-content: center; /* Center the link blocks horizontally */
             align-items: center;
-            border: 1px solid #ccc;
-            padding: 10px;
-            max-width: 80%;
+            
+            padding: 40px;
+            width: 100%; /* Make it fill the screen width */
         }
 
         .link-block {
+            display: flex;
+            flex-direction: row; /* Arrange text and icon horizontally */
+            align-items: center;
             text-align: center;
-            margin: 0 10px;
+            transition: transform 0.3s ease; /* Animation duration and easing */
+            max-width: 200px; /* Set a maximum width for each link block */
+            border: 1px solid #444; /* Border color for link blocks */
+            border-radius: 5px; /* Rounded edges */
+            padding: 25px;
+            margin: 0 10px; /* Spacing between link blocks */
+            margin-bottom: 20px; /* Add some margin at the bottom for spacing */
         }
 
         .link-block a {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-decoration: none;
-            color: #333;
+            color: #fff; /* Text color for dark theme */
         }
 
         .link-block a:hover {
@@ -38,30 +51,121 @@
         }
 
         .icon {
-            font-size: 24px;
+            width: 64px; /* Adjust icon size (bigger icons) */
+            height: 64px;
+        }
+
+        /* Define the hover effect */
+        .link-block:hover {
+            transform: scale(1.1); /* Increase the size by 10% on hover */
+        }
+
+        /* Dark theme */
+        .dark-theme .link-block {
+            background-color: #333; /* Background color for link blocks in dark theme */
+        }
+        body.dark-theme {
+            background-color: #333; /* Background color for link blocks in dark theme */
+        }
+        button.dark-theme{
+            background-color: #333;
+        }
+
+        .dark-theme .link-block a {
+            color: #fff; /* Text color for link blocks in dark theme */
+        }
+
+        /* Light theme */
+        button.light-theme{
+            background-color: #f5f5f5;
+        }
+
+        body.light-theme {
+            background-color: #f5f5f5; /* Background color for link blocks in dark theme */
+        }
+
+        .light-theme .link-block {
+            background-color: #f5f5f5; /* Background color for link blocks in light theme */
+        }
+
+        .light-theme .link-block a {
+            color: #000; /* Text color for link blocks in light theme */
+        }
+
+        .theme-toggle-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-image: url('https://static.thenounproject.com/png/2960752-200.png');
+            border: none;
+            width: 60px;
+            height: 60px;
+            background-size: cover;
+            border-radius: 10px;
         }
     </style>
 </head>
-<body>
+<body class="dark-theme">
     <div class="link-container">
         <div class="link-block">
-            <a href="#">
-                <span class="icon">Icon 1</span>
-                Link 1
+            <a target="_blank" href="https://www.notion.so/">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion Icon" class="icon">
+                <span>Notion</span>
             </a>
         </div>
         <div class="link-block">
-            <a href="#">
-                <span class="icon">Icon 2</span>
-                Link 2
+            <a target="_blank" href="https://chat.openai.com/">
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/openai-icon.png" alt="ChatGPT Icon" class="icon">
+                <span>ChatGPT</span>
             </a>
         </div>
         <div class="link-block">
-            <a href="#">
-                <span class="icon">Icon 3</span>
-                Link 3
+            <a target="_blank" href="https://trello.com/">
+                <img src="https://cdn.icon-icons.com/icons2/3041/PNG/512/trello_logo_icon_189227.png" alt="Trello Icon" class="icon">
+                <span>Trello</span>
+            </a>
+        </div>
+        <div class="link-block">
+            <a target="_blank" href="https://sigaa.ifpa.edu.br/sigaa/verTelaLogin.do">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Instituto_Federal_do_Par%C3%A1_-_Marca_Vertical_2015.svg/1200px-Instituto_Federal_do_Par%C3%A9_-_Marca_Vertical_2015.svg.png" alt="Sigaa Icon" class="icon">
+                <span>Sigaa</span>
+            </a>
+        </div>
+        <div class="link-block">
+            <a target="_blank" href="https://classroom.google.com/">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Google_Classroom_Logo.svg/512px-Google_Classroom_Logo.svg.png" alt="Classroom Icon" class="icon">
+                <span>Classroom</span>
+            </a>
+        </div>
+        <div class="link-block">
+            <a target="_blank" href="https://mail.google.com/">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/1280px-Gmail_icon_%282020%29.svg.png" alt="Email Icon" class="icon">
+                <span>Email</span>
+            </a>
+        </div>
+        <div class="link-block">
+            <a target="_blank" href="https://github.com/">
+                <img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" alt="GitHub Icon" class="icon">
+                <span>GitHub</span>
             </a>
         </div>
     </div>
+
+    <button class="theme-toggle-button" id="theme-switch"></button>
+
+    <script>
+        // Get the theme switch button and body element
+        const themeSwitchButton = document.getElementById("theme-switch");
+        const body = document.body;
+
+        // Function to toggle between dark and light themes
+        function toggleTheme() {
+            body.classList.toggle("dark-theme");
+            body.classList.toggle("light-theme");
+        }
+
+        // Add a click event listener to the theme switch button
+        themeSwitchButton.addEventListener("click", toggleTheme);
+    </script>
 </body>
 </html>
